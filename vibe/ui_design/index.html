@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电商 APP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF0000',
+                        secondary: '#FF8080'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F5F5F5;
+            min-height: 100vh;
+            width: 375px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .search-input::-webkit-input-placeholder {
+            color: #999;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            padding: 6px 0;
+            color: #999999;
+        }
+        .tab-item.active {
+            color: #FF0000;
+        }
+        .tab-item i {
+            font-size: 20px;
+            margin-bottom: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body class="relative">
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50 h-[56px] flex items-center px-4">
+        <div class="font-['Pacifico'] text-xl text-primary">logo</div>
+        <div class="flex-1 mx-4">
+            <div class="relative">
+                <input type="text" class="search-input w-full h-[36px] bg-gray-100 rounded-full px-4 pl-10 text-sm border-none" placeholder="搜索商品">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </div>
+        <i class="fas fa-bell text-gray-600"></i>
+    </nav>
+
+    <div class="mt-[66px] mb-[60px]">
+        <div class="bg-white p-4">
+            <img src="https://ai-public.mastergo.com/ai/img_res/3d4b080087ba8d49bc1794c1b19c1ad4.jpg" class="w-full h-[150px] object-cover rounded-lg" alt="banner">
+        </div>
+
+        <div class="grid grid-cols-5 gap-2 bg-white p-4">
+            <div class="text-center">
+                <div class="w-[64px] h-[64px] mx-auto mb-2 rounded-full overflow-hidden">
+                    <img src="https://ai-public.mastergo.com/ai/img_res/ab424c74383ca60c5f503dad4947a24c.jpg" class="w-full h-full object-cover" alt="category">
+                </div>
+                <p class="text-xs text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">限时特惠</p>
+            </div>
+            <div class="text-center">
+                <div class="w-[64px] h-[64px] mx-auto mb-2 rounded-full overflow-hidden">
+                    <img src="https://ai-public.mastergo.com/ai/img_res/616ca77fa10a618ff9c69c02ae808ead.jpg" class="w-full h-full object-cover" alt="category">
+                </div>
+                <p class="text-xs text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">优惠券</p>
+            </div>
+            <div class="text-center">
+                <div class="w-[64px] h-[64px] mx-auto mb-2 rounded-full overflow-hidden">
+                    <img src="https://ai-public.mastergo.com/ai/img_res/7bdc895eb61d5544d63ee0a90f3b3e7b.jpg" class="w-full h-full object-cover" alt="category">
+                </div>
+                <p class="text-xs text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">会员专享</p>
+            </div>
+            <div class="text-center">
+                <div class="w-[64px] h-[64px] mx-auto mb-2 rounded-full overflow-hidden">
+                    <img src="https://ai-public.mastergo.com/ai/img_res/a1f98579d0e099581f4947b1b4d73661.jpg" class="w-full h-full object-cover" alt="category">
+                </div>
+                <p class="text-xs text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">快速配送</p>
+            </div>
+            <div class="text-center">
+                <div class="w-[64px] h-[64px] mx-auto mb-2 rounded-full overflow-hidden">
+                    <img src="https://ai-public.mastergo.com/ai/img_res/ba0770ed381d98581a0c048654533d43.jpg" class="w-full h-full object-cover" alt="category">
+                </div>
+                <p class="text-xs text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">客服</p>
+            </div>
+        </div>
+
+        <div class="mt-4 bg-white p-4">
+            <h2 class="text-lg font-medium mb-4">热门推荐</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="https://ai-public.mastergo.com/ai/img_res/aec8581a8414d1a3631caeec339d4a50.jpg" class="w-full h-[160px] object-cover" alt="product">
+                    <div class="p-2">
+                        <p class="text-sm text-gray-800">新款智能手机 Pro Max</p>
+                        <p class="text-primary font-medium mt-1">¥ 4999</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="https://ai-public.mastergo.com/ai/img_res/1cdbdb591c36525ee424512babea0f82.jpg" class="w-full h-[160px] object-cover" alt="product">
+                    <div class="p-2">
+                        <p class="text-sm text-gray-800">无线蓝牙耳机</p>
+                        <p class="text-primary font-medium mt-1">¥ 899</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-100">
+        <div class="grid grid-cols-5">
+            <div class="tab-item active">
+                <i class="fas fa-home"></i>
+                <span>首页</span>
+            </div>
+            <div class="tab-item">
+                <i class="fas fa-play"></i>
+                <span>视频</span>
+            </div>
+            <div class="tab-item">
+                <i class="fas fa-comment"></i>
+                <span>消息</span>
+            </div>
+            <div class="tab-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span>购物</span>
+            </div>
+            <div class="tab-item">
+                <i class="fas fa-user"></i>
+                <span>我的</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
