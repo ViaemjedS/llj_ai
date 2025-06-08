@@ -1,0 +1,148 @@
+.music-app {
+  display: flex;
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.song-list {
+  width: 40%;
+  padding: 20px;
+  background: rgba(30, 30, 60, 0.3);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.song-list h2 {
+  color: #e94560;
+  text-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(233, 69, 96, 0.3);
+}
+
+.player {
+  width: 60%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(20, 20, 50, 0.2);
+  backdrop-filter: blur(5px);
+  /* 确保播放器区域可见 */
+  min-height: 400px;
+}
+
+button {
+  background: linear-gradient(90deg, #e94560 0%, #ff6b6b 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+}
+
+.player h2 {
+  color: #e3f2fd;
+}
+
+.lyrics-container {
+  height: 200px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  scroll-behavior: smooth;
+}
+
+.lyric-line {
+  padding: 12px 0;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.lyric-line.active {
+  color: #ffd166;
+  font-weight: bold;
+  font-size: 1.3em;
+  text-shadow: 0 0 10px rgba(255, 209, 102, 0.7);
+  transform: scale(1.05);
+}
+
+.lyric-line.active {
+  color: #ffd166;
+  text-shadow: 0 0 15px rgba(255, 209, 102, 0.7);
+}
+
+.lyric-line {
+  padding: 8px 0;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+}
+
+.lyric-line.active {
+  color: #feff9c;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-shadow: 0 0 10px rgba(254, 255, 156, 0.5);
+}
+
+button {
+  background: linear-gradient(90deg, #2196f3 0%, #1976d2 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 126, 179, 0.4);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 12px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+li:hover {
+  background: rgba(30, 136, 229, 0.2);
+  transform: translateX(4px);
+}
+
+canvas {
+  width: 100%;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin: 10px 0;
+}
