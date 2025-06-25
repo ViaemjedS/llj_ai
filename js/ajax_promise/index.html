@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS请求 </title>
+    <script>
+        // 阻塞
+        //  DOMContentLoaded ：DOM树构建完成立即触发（不等待样式表、图片等资源）
+        //  window.onload ：所有资源（图片、样式表等）加载完成后触发
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     console.log(document.getElementById('repos'));
+        // })
+
+        
+    </script>
+</head>
+
+<body>
+    <ul id="repos"></ul>
+    <script>
+        // document.addEventListener('DOMContentLoaded', async () => {
+        //     // console.log(document.getElementById('repos'));
+        //     // then 的链式调用有点繁琐
+        //     // es6 async await 
+        //     fetch('https://api.github.com/users/ViaemJedS/repos')
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             // console.log(json);
+        //             document.getElementById('repos').innerHTML = data.map(item => 
+        //             ` <li>${item.name}</li>`).join('');
+        //         })
+        // })
+
+        document.addEventListener('DOMContentLoaded', async () => {
+        // 改进
+        // 同步代码一样
+        // es8 async await
+        // await promise 实例
+        // new Promise Promise {} fetch本质是 返回 promise 实例
+        // pending 状态 等待
+        console.log(fetch('https://api.github.com/users/ViaemJedS/repos'));
+        // resolve() fullfilled 完成了
+        // reject() rejected 失败
+        const result = await fetch('https://api.github.com/users/ViaemJedS/repos');
+        const data = await result.json();
+        // console.log(data);
+        document.getElementById('repos').innerHTML = data.map(item => 
+                    ` <li>${item.name}</li>`).join('');
+        });
+    </script>
+    <script>
+         // api 接口地址
+        // www.bilibili.com 网站地址， 用户访问的
+        // https://api.github.com/users/ViaemJedS url
+        // JSON格式 数据返回
+        // 资源
+        // 前端通过js fetch 主动拉取资源
+        // web 2.0 动态页面
+    </script>
+</body>
+</html>
