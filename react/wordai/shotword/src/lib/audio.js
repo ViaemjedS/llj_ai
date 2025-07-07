@@ -17,7 +17,7 @@ export const generateAudio = async () => {
             cluster: clusterId
         },
         user: {
-            uid: 'barbobo'
+            uid: 'bearbobo'
         },
         audio: {
             voice_type: voiceName,

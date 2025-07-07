@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="item">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    <script>
+        const lis = document.querySelector('myList');
+        // es6 新的循环  计数循环 let i = 0;i < lis.length; i++ CPU友好
+        // 机械， 可读性差， 
+        for(let item of lis) { // 更语义化
+            // 向浏览器 event loop 注册了一堆事件
+            // 性能很差
+            // 没有必要
+            item.addEventListener('click', function(event) {
+                console.log(event.target.innerText);
+            }, false)
+
+        }
+
+        // event.target 目标阶段 事件发生在的元素，而不是事件监听的元素
+        // 委托给父元素， react 性能优化到极致   #root挂载点
+        document.getElementById('myList').addEventListener('click', function(event) {
+            console.log(event.target.innerText);
+        }, false);
+
+    </script>
+</body>
+</html>

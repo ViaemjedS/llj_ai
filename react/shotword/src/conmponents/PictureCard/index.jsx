@@ -24,6 +24,11 @@ const PictureCard = (props) => {
             reader.onerror = (error) => { reject(error); };
         })
     }
+    
+    const playAudio = () => {
+        const voice = new Audio(audio);
+        voice.play();
+    }
 
     return (
         <div className='card'>
@@ -40,6 +45,11 @@ const PictureCard = (props) => {
             </label>
             {/* template -> JSX -》 {数据绑定} -> 响应式 -》单词业务 */}
             <div className="word">{word}</div>
+            {audio && (
+                <div className="playAudio" onClick={playAudio}>
+                    <img width="20px" src="https://res.bearbobo.com/resource/upload/Omq2HFs8/playA-3iob5qyckpa.png" alt="logo" />
+                </div>
+             )}
         </div>
     )
 }
