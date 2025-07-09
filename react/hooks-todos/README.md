@@ -54,6 +54,63 @@
   <input v-model="text"/> vue 双向绑定
   <input value={text} onChange={() => setText(text);}/>
    react 坚持 单向绑定
+
+- 本地存储
+  - localStorage html
+  key : value 存储
+  setItem(key, value)
+  getItem(key)
+  removeItem(key)
+  - BOM Browser Object Model
+  - DOM Document Object Model
+- 本地存储
+  - localStorage 和 cookie 区别
+  -  http 无状态， head cookie 带上
+  - 如果cookie 太大，影响http 性能 4kb
+  - cookie 前端，后端都可以设置
+      过期时间
+      domain 隔离
+  - localStorage 只在服务器端
+    todos
+    5MB
+  - IndexDB 数据库 GB
+## 自定义hooks
+  - 自己定义的
+  - use
+  - 某一项功能
+    简单函数的封装
+    响应式的状态
+    effect
+    todos
+- 自定义hooks
+  - 现代react app 的架构一部分
+  - hooks目录
+      自定义hooks
+      框架common 部分
+      业务定制 a hooks
+  - use开头
+      state，effect 逻辑封装复用
+  - return
+      todos
+      toggle
+      addTodos
+      deleteTodos
+      函数式编程思想的体现
+  - 组件更好的聚焦于模块渲染
+  - 全面hooks函数式编程
+
+- 两个遗憾
+  - ../../ 路径山路18弯
+      vite 配置alias 短路径
+      resolve: {
+        // 别名
+        alias: {
+          '@' : path.resolve(__dirname, './src'),
+        },
+      },
+  - toggle、delete 跨越组件层级别有点多，
+    useContext 跨组件层级
+  
   
 
 

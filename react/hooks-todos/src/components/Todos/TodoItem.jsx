@@ -10,8 +10,7 @@ const TodoItem = (props) => {
         onDelete
      } = props
     return (
-        <div id="todo-item">
-            <div className="todo-content">
+        <div className="todo-item">
                 <input 
                     type="checkbox" 
                     checked={isCompleted} 
@@ -19,8 +18,6 @@ const TodoItem = (props) => {
                 />
                 <span className={isCompleted ? 'completed' : ''}>{text}</span>
                 <button onClick={onDelete}>Delete</button>
-            </div>
-            <div className="underline"></div>
         </div>
     )
 }
