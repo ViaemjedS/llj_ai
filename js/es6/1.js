@@ -4,3 +4,4 @@ const age = 2;
 // 字符串拼接
 const sentence =  `My dog ${name} is ${age * 7}`;
 console.log(sentence);
+

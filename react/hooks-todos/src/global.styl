@@ -10,10 +10,92 @@ body
 .app
     max-width 600px
     margin 0 auto 
-    background white
+    // 蓝色渐变色背景
+    background linear-gradient(to right,#19e1ec,#0f1eef)
     padding 2rem
     border-radius 0.5rem
     box-shadow 0 2px 3px rgba(0, 0, 0, 0.1 )
 
+#todo-input
+    display flex
+    justify-content space-between
+    align-items center
+    width 100%
+    margin-bottom 1rem
+    
+    input
+        flex-grow 1
+        margin-right 1rem
+
+#todo-button
+    display inline-block
+    background linear-gradient(to right, #ff69b4, #ffffff)
+    border none
+    padding 0.5rem 1rem
+    border-radius 0.25rem
+    transition background 0.3s ease  // 添加过渡效果使变色更平滑
+
+#todo-button:active
+    background linear-gradient(to right, #ff1493, #e0e0e0)  // 点击时变为更深的粉到浅灰渐变色
+    
+#todo-item
+    text-align center // 让item居中
+    font-size 1.2rem // 增大字体大小
+    font-family SimSun, serif // 使用宋体，无宋体时回退到serif字体
+    background -webkit-linear-gradient(45deg, #ff9a9e, #fad0c4) // 使用更柔和的粉到浅粉渐变背景，添加45度角度使效果更美观
+    -webkit-background-clip text // 将背景裁剪为文字效果
+    -webkit-text-fill-color transparent // 使文字透明以显示背景渐变效果
+    
+
+
 .header
     text-align center
+
+#todo-item button
+    background linear-gradient(to right, #ff5e62, #ff9966)
+    border none
+    padding 0.5rem 1rem
+    border-radius 0.25rem
+    color white
+    font-weight bold
+    transition all 0.3s ease
+    cursor pointer
+    
+    // 修改文字渐变效果为更明显的颜色
+    background-clip text
+    -webkit-background-clip text
+    -webkit-text-fill-color transparent
+    background-image linear-gradient(to right, #fff, #ffcc00)
+    
+    &:hover
+        background linear-gradient(to right, #ff9966, #ff5e62)
+        transform scale(1.05)
+        box-shadow 0 2px 5px rgba(0,0,0,0.2)
+        // 确保悬停时文字仍然可见
+        -webkit-text-fill-color #fff
+    
+    &:active
+        transform scale(0.98)
+
+#todo-item
+    margin-bottom 1rem
+    padding-bottom 0.5rem
+    
+    .todo-content
+        display flex
+        justify-content space-between
+        align-items center
+        
+        span
+            flex 1
+            text-align center
+            margin 0 1rem
+            
+    .underline
+        height 1px
+        background linear-gradient(to right, transparent, #ccc, transparent)
+        margin-top 0.5rem
+
+.completed
+    text-decoration line-through !important
+    color #888 !important
