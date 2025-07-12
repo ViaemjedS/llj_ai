@@ -7,7 +7,7 @@
   <style>
   .container {
     background-color:green;
-    width: 400px;
+    overflow: hidden; /* 触发BFC！ */
   }
   .box {
     margin: 100px;
@@ -24,9 +24,6 @@
 <body>
   <div class="container">
     <div class="box"></div>
-    <div>1212121212，我爱黎明，我爱张学友。我爱黎明，我爱张学友。我爱黎明，我爱张学友。我爱黎明，我爱张学友。我爱黎明，我爱张学友。
-      我爱黎明，我爱张学友。我爱黎明，我爱张学友。我爱黎明，我爱张学友。我爱黎明，我爱张学友。
-    </div>
     <!-- <div class="box"></div>
     <div class="box"></div> -->
   </div>

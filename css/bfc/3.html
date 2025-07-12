@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>BFC多列布局对比示例</title>
+  <style>
+    .demo-container {
+      margin: 30px 0;
+      padding: 15px;
+      background: #f5f5f5;
+      border-radius: 8px;
+    }
+    .title {
+      color: #333;
+      border-left: 4px solid #9c27b0;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+    /* 基础样式 */
+    .layout-container {
+      width: 100%;
+      border: 2px solid #9c27b0;
+      margin-bottom: 20px;
+    }
+    .column {
+      width: 33.33%;
+      float: left;
+      color: white;
+      padding: 15px;
+      box-sizing: border-box; /* 确保padding不影响宽度计算 */
+    }
+    .col1 { background: #ff9800; }
+    .col2 { background: #8bc34a; }
+    .col3 { background: #03a9f4; }
+    /* 未触发BFC的容器 */
+    .without-bfc {
+      /* 未触发BFC：容器高度塌陷，边框无法包裹浮动元素 */
+    }
+    /* 触发BFC的容器 */
+    .with-bfc {
+      /* 触发BFC：容器能正确包裹浮动元素 */
+      overflow: hidden; 
+    }
+    /* 内容溢出测试 */
+    .tall-content {
+      height: 150px; /* 其中一列内容高度增加 */
+    }
+    .overflow-content {
+      width: 120%; /* 内容宽度溢出列容器 */
+    }
+    /* 修复说明标签 */
+    .fix-note {
+      background: #ffe0b2;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #e65100;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>BFC多列布局核心作用演示</h2>
+
+  <!-- 问题1：未触发BFC导致容器高度塌陷 -->
+  <div class="demo-container">
+    <h3 class="title">问题：未触发BFC的容器无法包裹浮动元素</h3>
+    <div class="layout-container without-bfc">
+      <div class="column col1">第一列</div>
+      <div class="column col2">第二列</div>
+      <div class="column col3">第三列</div>
+    </div>
+    <p class="fix-note">⚠️ 现象：紫色边框容器高度塌陷（看不到高度），因为浮动元素脱离文档流</p>
+  </div>
+
+  <!-- 解决方案1：容器触发BFC解决高度塌陷 -->
+  <div class="demo-container">
+    <h3 class="title">解决方案：容器触发BFC包裹浮动元素</h3>
+    <div class="layout-container with-bfc">
+      <div class="column col1">第一列</div>
+      <div class="column col2">第二列</div>
+      <div class="column col3">第三列</div>
+    </div>
+    <p class="fix-note">✅ 修复：容器添加 <code>overflow: hidden</code> 触发BFC， now能正确包裹浮动列</p>
+  </div>
+
+  <!-- 问题2：内容溢出影响其他列 -->
+  <div class="demo-container">
+    <h3 class="title">问题：列内容溢出影响相邻列（未触发BFC）</h3>
+    <div class="layout-container with-bfc">
+      <div class="column col1">第一列</div>
+      <div class="column col2">
+        <div class="overflow-content">第二列内容溢出（宽度120%）</div>
+      </div>
+      <div class="column col3">第三列（被溢出内容覆盖）</div>
+    </div>
+    <p class="fix-note">⚠️ 现象：第二列内容溢出后覆盖了第三列，因为列本身未触发BFC</p>
+  </div>
+
+  <!-- 解决方案2：列触发BFC防止内容溢出 -->
+  <div class="demo-container">
+    <h3 class="title">解决方案：列元素触发BFC隔离内容</h3>
+    <div class="layout-container with-bfc">
+      <div class="column col1">第一列</div>
+      <div class="column col2" style="overflow: hidden;"> <!-- 列触发BFC -->
+        <div class="overflow-content">第二列内容溢出（但被BFC隔离）</div>
+      </div>
+      <div class="column col3">第三列（不受溢出影响）</div>
+    </div>
+    <p class="fix-note">✅ 修复：给第二列添加 <code>overflow: hidden</code> 触发BFC，内容溢出被限制在列内部</p>
+  </div>
+
+  <!-- 扩展：BFC实现等高列布局 -->
+  <div class="demo-container">
+    <h3 class="title">扩展：BFC实现等高列布局（传统方案）</h3>
+    <div class="layout-container with-bfc">
+      <div class="column col1">第一列（普通高度）</div>
+      <div class="column col2" style="overflow: hidden;">
+        <div class="tall-content">第二列（高度增加）</div>
+      </div>
+      <div class="column col3" style="overflow: hidden;">第三列（自动与最高列等高）</div>
+    </div>
+    <p class="fix-note">💡 原理：BFC容器内的浮动元素会根据内容最高的列自动调整高度，实现伪等高效果</p>
+  </div>
+</body>
+</html>
