@@ -10,17 +10,21 @@ import {
   Route, // 单条路由
 } from "react-router-dom";
 
-import ProtectRoute from './pages/ProtectRoute';
-import Nav from './components/Nav';
-import Pay from './pages/Pay';
-
+// import Nav from './components/Nav';
+// import Pay from './pages/Pay';
+// import ProtectRoute from './pages/ProtectRoute';
 // import Home from './pages/Home'
 // import About from './pages/About'
+// import NotFound from './pages/NotFound'
+// import Login from './pages/Login'
 // 30几个页面
 
 // 函数 路由 => Route 
 // 新的组件
 // 懒加载
+const ProtectRoute = lazy(() => import ('./pages/ProtectRoute'))
+const Nav = lazy(() => import('./components/Nav'));
+const Pay = lazy(() => import('./pages/Pay'));
 const Home = lazy(() => import('./pages/Home')); // lazy会返回一个新组件
 const About = lazy(() => import('./pages/About'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -48,6 +52,17 @@ function App() {
         </Suspense>
       </Router>
     </>
+    // <>
+    //   <Router>
+    //     <Nav/>
+    //       <Routes>
+    //         <Route path="/" element={<Home />} /> 
+    //         <Route path="/about" element={<About />} />
+    //         <Route path="/pay" element={<Pay />} />
+    //         <Route path='*' element={<NotFound />} /> 
+    //       </Routes>
+    //   </Router>
+    // </>
   )
 }
 
