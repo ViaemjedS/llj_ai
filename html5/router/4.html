@@ -12,11 +12,11 @@
     <button onclick="navigate('/concat')">联系</button>
     <button onclick="navigate('/login')">登录</button>
     <button onclick="replace('/pay')">支付</button>
-    <a href="https://www.zhihu.com">知乎</a>
+    <!-- <a href="https://www.zhihu.com">知乎</a> -->
     <div id="view">当前视图</div>
     <script>
         function render(path) {
-            document.getElementById('view').textContent= `当前视图': ${path}`
+            document.getElementById('view').textContent= `当前视图: ${path}`
         }
         function replace(path) {
             history.replaceState({path}, '', path);
@@ -33,7 +33,7 @@
         // 监听浏览器前进/后退事件
         window.addEventListener('popstate', (event) => {
             console.log('pop state fired: ', event.state);
-            render(event?.state?.path || location.pathname);
+            render(event.state.path || location.pathname);
         })
     </script>
 </body>
