@@ -33,7 +33,7 @@
         // 监听浏览器前进/后退事件
         window.addEventListener('popstate', (event) => {
             console.log('pop state fired: ', event.state);
-            render(event.state.path || location.pathname);
+            render(event.state?.path || location.pathname);
         })
     </script>
 </body>
