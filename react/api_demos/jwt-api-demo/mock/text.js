@@ -29,8 +29,8 @@ export default [
             const repos = [
                 {
                     id: 695370163,
-                    title: 'ai_lesson',
-                    description: "AI全栈工程师课程",
+                    title: 'CS',
+                    description: "couterstar",
                 },
                 {
                     id: 152578450,
