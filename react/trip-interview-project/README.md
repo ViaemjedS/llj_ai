@@ -206,7 +206,13 @@ ReadMe.md 很重要
     - 文件上传的preview html5 FileReader
 - 在瀑布流中一直刷新一直刷新，每次都会增加新的数组，之前的图片数据会重新渲染吗？
     不会，因为我们给每一个图片指定了唯一的key，只能渲染刚插入的新图片数组
-
+- 语音输入发表文章
+    - 字节的 tts
+    - onMouseDown
+    - BOM html5
+    navigator.mediaDevices.getUserMedia({
+        audio:true
+    })
 
 
 ## 项目遇到过什么问题，怎么解决的
@@ -247,3 +253,5 @@ ReadMe.md 很重要
         position:fixed + tlrb0 + margin auto
     - React.memo 无状态组件 不重新渲染
     - animation
+- AI 功能
+    智能前端（http请求） + 工作流 + coze api + ai 全新工作链路 + 自动化Agent
