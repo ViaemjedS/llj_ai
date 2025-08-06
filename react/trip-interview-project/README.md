@@ -102,6 +102,7 @@ ReadMe.md 很重要
 ## git 提交规范
 - 项目初始化
 ## 功能模块
+
 - UI 组件库
     - react-vant 第三方组件库 70%的组件已经有了，不用写
     - 选择一个适合业务的UI组件库 或者公司内部自己的组件库
@@ -121,6 +122,35 @@ ReadMe.md 很重要
 - chatbot 模块
     - llm 模块 chat 封装
     - 迭代chat,支持任意模型
+- Search
+    - 防抖
+    - api
+        GoogleSuggest
+- 瀑布流
+    - 小红书等主流App的内容浏览用户体验产品
+        两列、图片高度不一致、落差感
+        滚动加载更多，图片懒加载
+    - 接口
+        /api/images?page=${n} 支持翻页
+        唯一id page + index
+        随机图片， 高度随机
+    - images 怎么放到两列中？ MVVM
+    数据驱动界面（2列） 先奇偶
+    - 加载更多 位于盒子底部的元素 通过使用IntersectionObserver
+    观察它是否出现在视窗， 性能更好， 使用了观察者模式
+    组件卸载时，直接使用discconnect 释放资源，防止内存泄漏
+    - key id 下拉刷新
+    - 使用IntersectionObserver 再次图片懒加载 data-src
+- toast 组件封装
+    - 需要自定义，UI组件库不满足需求
+    - UI props
+    - JS 显示出来 跨层级通信
+        观察者
+    - mitt eventBus 事件总线
+        - 实例化 mitt()
+        - on （自定义事件的名字， callback）
+        - emit （自定义事件的名字， 参数）
+        组件通过监听一个自定义事件，实习基于事件的组件通信
 
 ## 项目亮点 和难点
 - 前端智能
@@ -128,6 +158,8 @@ ReadMe.md 很重要
     - 对各家模型比较感兴趣, 升级为kimiChat，doubaoChat ... 灵活
         性能、能力、性价比
         随意切换大模型，通过参数抽象
+    - 文生图
+        - 优化prompt 设计
 - 原子css
     - App.css里面添加通用样式
     - 各自模块里module.css不影响别的组件
@@ -137,14 +169,68 @@ ReadMe.md 很重要
         一个元素按功能逻辑拆分成多个类, 和原子一样
         元素的样式就可以由这些原子类组合而成
         样式复用的更好，以后几乎可以不用写样式
-- 自定义Hooks
-    - useTitle
-    一定要设置
+    - 智能生成图片
+        - 产品
+        冰球社群的宠物 智能出图
+        社交属性
+        - 商业价值
+        coze 工作流 智能编排AI 流程 编程一种
+        - api 调用
 
+    - 设计工作流
+        - 创建工作流 ani-pic
+            上传宠物照片，生成宠物冰球运动员照片
+        - 代码节点
+            参数校验和逻辑功能， 返回运行的结果
+        - 图片生成流程
+            - 图片理解插件 计算机视觉
+            - 大模型 特征提取
+            prompt
+    - workflow_id 7533134926993408046
+    - token 
+    - coze 图片要先上传到coze中
+        uploadUrl + token +
+        拿到file_id
+    - workflowUrl + workflow_id + token
+        工作流需要的参数
+        
+- 用户体验优化
+    - 搜索建议，防抖+useMemo
+    - 组件粒度划分
+        React.memo + useCallback
+    - 懒加载
+    - 热门推荐 + 相关商品（产品）
+    - 搜索记录
+    - SPA
+    - 骨架屏
+    - 文件上传的preview html5 FileReader
+- 在瀑布流中一直刷新一直刷新，每次都会增加新的数组，之前的图片数据会重新渲染吗？
+    不会，因为我们给每一个图片指定了唯一的key，只能渲染刚插入的新图片数组
+
+
+
+## 项目遇到过什么问题，怎么解决的
+- chat messages 遇到message 覆盖问题
+    - 闭包陷阱问题
+        一次事件里面，两次setMessages()
 - es6 特性使用
     - arr.findIndex
     - str.starsWith
     - promise
+    瀑布流随机数据生成
+    - Array.from({length:pageSize}, (_,i) => ({
+
+    }))
+- 升级瀑布流？
+    - 骨架屏
+    - 奇偶images 两列分配可能有时候会长，有时候短，随机性太强了，不好看 
+        两个响应式数组，判断哪一列高度更少，将新得到的加入img加入那个数组
+    - intersectionObserver 用的两次， 重复了， dry 原则 封装？
+
+
+- 自定义Hooks
+    - useTitle
+    一定要设置
 
 - 项目迭代
     - 功能由浅入深
@@ -153,12 +239,11 @@ ReadMe.md 很重要
     - 流式输出
     - 上下文 LRU 
     - coze 工作流接口调用
+  
 
-## 项目遇到过什么问题，怎么解决的
-- chat messages 遇到message 覆盖问题
-    - 闭包陷阱问题
-        一次事件里面，两次setMessages()
-        
-
-- 模型输出的格式为markdown，#等markdown格式影响用户观感
-    - 可以在llm中对模型输出进行限制处理
+## 通用组件开发
+- Loading 
+    - 居中方案
+        position:fixed + tlrb0 + margin auto
+    - React.memo 无状态组件 不重新渲染
+    - animation

@@ -11,18 +11,23 @@ import {
 } from'react-router-dom'
 import MainLayout from '@/components/MainLayout'
 import BlankLayout from '@/components/BlankLayout'
+import Loading from '@/components/Loading'
+
 const Home = lazy(() => import('@/pages/Home'))
-const Search = lazy(() => import('@/pages/Search'))
 const Collection = lazy(() => import('@/pages/collection'))
+const Discount = lazy(() => import('@/pages/Discount'))
 const Trip = lazy(() => import('@/pages/Trip'))
 const Account = lazy(() => import('@/pages/Account'))
-const Discount = lazy(() => import('@/pages/Discount'))
-
+const Search = lazy(() => import('@/pages/Search'))
+const Detail = lazy(() => import('@/pages/Detail'));
+const Coze = lazy(() => import('./pages/Coze/index.jsx'));
+import Toast from '@/components/Toast'
 function App() {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      {/* <Loading/> */}
+      <Suspense fallback={<Loading/>}>
       <Routes>
         {/* 带有tabbar的Layout */}
         <Route element={<MainLayout/>}>
@@ -35,10 +40,13 @@ function App() {
         </Route>
         {/* 空的Layout */}
         <Route element={<BlankLayout/>}>
+          <Route path="/coze" element={<Coze />}/>
           <Route path="/search" element={<Search/>}/>
+          <Route path="/detail/:id" element={<Detail />}/>
         </Route>
       </Routes>
       </Suspense>
+      <Toast/>
     </>
   )
 }

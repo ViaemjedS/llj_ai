@@ -45,3 +45,12 @@ export const kimiChat = async (messages) => {
     );
     return res
 }
+
+export const generateAvatar = async () => {
+    // 设计prompt
+    const prompt = `
+        你是一位头像设计师，需要为用户设计头像，主打米山舞或藤本树风格。
+        用户的信息是${text}。
+        要求有个性，有设计感。
+    `
+}
