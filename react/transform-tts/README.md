@@ -20,3 +20,11 @@
     - getInstance 只实例化一次
     - 懒执行
     - Promise.all + nlp 流程的理解 (tokenizer、 model、 vscoder)
+
+- audio 标签的url <- Object.createObjectURL(blob)
+    input_ids(tokenizer 分词) + speaking——embeddings + vocoder (合成器) <- tokenizer + speaking
+    blob 二进制文件
+    Object.createObjectURL 是一个用于创建一个唯一 URL，该 URL
+    大模型不负责给你全局访问的地址
+    可以引用由浏览器内部生成的对象(如 Blob 或 File 对象) 的方法，常用于
+    在网页中显示文件内容，如图片预览

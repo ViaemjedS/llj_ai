@@ -19,7 +19,16 @@ function App() {
   // 音色 
   const [selectedSpeaker,setSelectedSpeaker] = useState(DEFAULT_SPEAKER);
 
-  const [output,setOutput] = useState(null);
+  const [output, setOutput] = useState(null);
+
+  // 添加useEffect钩子以释放Blob URL
+  useEffect(() => {
+    return () => {
+      if (output) {
+        URL.revokeObjectURL(output);
+      }
+    };
+  }, [output]);
 
   const worker = useRef(null);
   useEffect(() => {
@@ -33,7 +42,7 @@ function App() {
     //   text: '哇哇哇哇'
     // })
     const onMessageReceived = (e) => {
-      console.log(e, '来自主线程');
+      // console.log(e, '来自主线程');
       switch(e.data.status) {
         case 'initiate':
           // llm ready 了吗？
@@ -64,6 +73,27 @@ function App() {
         case 'ready':
           setReady(true);
         break;
+        case 'complete':
+          setDisabled(false);
+          // 释放旧的Blob URL
+          if (output) {
+            URL.revokeObjectURL(output);
+          }
+          // 添加Blob对象有效性检查
+          if (!e.data.output || !(e.data.output instanceof Blob)) {
+            console.error('Invalid audio blob received from worker');
+            alert('生成音频失败: 收到无效的音频数据');
+            return;
+          }
+          const blobUrl = URL.createObjectURL(e.data.output);
+          setOutput(blobUrl);
+        break;
+      case 'error':
+        setDisabled(false);
+        console.error('Worker error:', e.data.message);
+        // 显示错误信息给用户
+        alert(`生成音频失败: ${e.data.message}`);
+        break;
       }
     }
 
@@ -71,7 +101,7 @@ function App() {
     return () => worker.current.removeEventListener('message',
       onMessageReceived
     )
-  },[])
+  },[output])
 
   const handleGenerateSpeech = () => {
     setDisabled(true);
@@ -160,8 +190,8 @@ function App() {
             <div className='flex justify-center'>
               <button
                 className={`${disabled? 'bg-gray-400 cursor-not-allowed':
-                  'bg-blue-500 hover-bg-blue-600'}
-                  text-white rouned-md py-2 px-4`}
+                  'bg-blue-500 hover:bg-blue-600'} 
+                  text-white rounded-md py-2 px-4`}
                 onClick={handleGenerateSpeech}
                 disabled={disabled}
               >
