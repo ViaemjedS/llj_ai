@@ -35,71 +35,71 @@ const Trip = () => {
             role: 'assistant'
         },
         {
-            id: 2,
+            id: 4,
             content: 'pagi',
             role: 'user',
         },
         {
-            id: 1,
+            id: 3,
             content: 'selamat pagi',
             role: 'assistant'
         },{
-            id: 2,
+            id: 6,
             content: 'pagi',
             role: 'user',
         },
         {
-            id: 1,
+            id: 5,
             content: 'selamat pagi',
             role: 'assistant'
         },
         {
-            id: 2,
+            id: 8,
             content: 'pagi',
             role: 'user',
         },
         {
-            id: 1,
+            id: 7,
             content: 'selamat pagi',
             role: 'assistant'
         },
         {
-            id: 2,
+            id: 10,
             content: 'pagi',
             role: 'user',
         },
         {
-            id: 1,
+            id: 9,
             content: 'selamat pagi',
             role: 'assistant'
         },
         {
-            id: 2,
+            id: 12,
             content: 'pagi',
             role: 'user',
         },
         {
-            id: 1,
+            id: 11,
             content: 'selamat pagi',
             role: 'assistant'
         },
         {
-            id: 2,
+            id: 14,
             content: 'pagi',
             role: 'user',
         },
         {
-            id: 1,
+            id: 13,
             content: 'selamat pagi',
             role: 'assistant'
         },
         {
-            id: 2,
+            id: 16,
             content: 'pagi',
             role: 'user',
         },
         {
-            id: 1,
+            id: 15,
             content: 'selamat pagi',
             role: 'assistant'
         },
@@ -129,10 +129,11 @@ const Trip = () => {
                 role:'user',
                 content: text,
             }
-        ]);[
-            ...messages,
-            newMessage.data
-        ]
+        ]);
+        // [
+        //     ...messages,
+        //     newMessage.data
+        // ]
         setMessages((prev) => {
             return [
                 ...prev,

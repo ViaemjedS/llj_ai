@@ -6,13 +6,13 @@ import {
 } from '@/store/user';
 import {
     useNavigate,
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 const Login = () => {
-    const usernameRef = useRef()
-    const passwordRef = useRef()
-    const navigate = useNavigate()
-    const {login} = useUserStore()
+    const usernameRef = useRef();
+    const passwordRef = useRef();
+    const navigate = useNavigate();
+    const {login} = useUserStore();
     const handleLogin = (e) => {
         e.preventDefault();
         const username = usernameRef.current.value;
