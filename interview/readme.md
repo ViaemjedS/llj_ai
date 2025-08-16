@@ -37,3 +37,7 @@
     git commit -m '' 提交到仓库
     git push origin main 提交到远程仓库
     
+- 回退commit
+    git reset --soft hash  --soft会保留暂存区和工作目录的更改
+
+    
