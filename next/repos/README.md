@@ -36,3 +36,9 @@ npx create-next-app@latest repos
 
 - RESTful 是一种基于HTTP协议设计的软件架构风格，后端通过定义资源的 URI，利用 HTTP 动词 （如GET、 POST、 PUT、 DELETE） 对资源进行操作，实现前后端分离和接口的统一化管理 
 
+- AppRouter
+    自动配置路由，文件夹即路由
+- layout
+    布局
+    
+

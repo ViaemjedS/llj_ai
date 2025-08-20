@@ -2,11 +2,8 @@ import {
     NextResponse // res
 } from 'next/server' // api server
 // ts 是js的超集
-interface Todo {
-    id:number;
-    text: string;
-    completed:boolean;
-}
+import { type Todo } from '@/app/types/todo'
+
 // let todos: {id:number;text: string;completed:boolean}[] = [];
 
 let todos: Todo[] = [
@@ -40,4 +37,20 @@ export async function POST(request: Request) {
     }
     todos.push(newTodo);
     return NextResponse.json(newTodo);
+}
+
+export async function PUT(request: Request) {
+    const data = await request.json(); // 请求体
+    todos = todos.map(todo =>
+         todo.id === data.id ? {...todo, completed: data.completed}: todo
+    );
+    return NextResponse.json(todos);
+}
+
+// restful 简历
+export async function DELETE(request: Request) {
+    const data = await request.json();
+    todos = todos.filter(todo => todo.id !== data.id);
+    return NextResponse.json(todos);
+
 }
