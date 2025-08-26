@@ -76,7 +76,8 @@ el.style.transform = ' translateX(100px)'
     - script 资源的加载 阻塞的
         默认没有
         async 并发
-        defer
+        defer 延迟加载  等dom 解析完成，(DOMContenLoaded事件触发后)再执行
+
         module   // 功能
     - webp 格式图片
         图片的优化，显著的减少体积，并质量不受影响
@@ -88,7 +89,7 @@ el.style.transform = ' translateX(100px)'
     - 防抖节流
     - web worker 处理复杂计算
     - requestAnimationFrame 优化动画
-    -requestIdleCallback react fiber机制
+    - requestIdleCallback react fiber机制
         schedule 机制 
 
 ## 框架层优化
@@ -107,6 +108,7 @@ el.style.transform = ' translateX(100px)'
     If-Modified-Since / Last-Modified  时间戳 304
 
 - localStorage/sessionStorage/cookie
+- indexedDB
 
 ## 网络优化
     - CDN 加速
