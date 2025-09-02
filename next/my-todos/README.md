@@ -16,3 +16,4 @@ Migration 数据库结构变更 (建表 改字段) 等
 pnpm i prisma @prisma/client
 npx prisma init
 npx prisma migrate dev --name init
+
