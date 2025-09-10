@@ -21,6 +21,7 @@ export default function LoginPage() {
       })
 
       if (res.ok) {
+        console.log('准备跳转');
         router.push('/dashboard') // 登录成功跳转
       } else {
         const data = await res.json()

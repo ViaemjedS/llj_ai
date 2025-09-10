@@ -63,7 +63,7 @@ export async function POST(request: NextRequest){
                 id: user.id
             },
             data: {
-                refreshToken
+                refresh_token: refreshToken
             }
         })  
         setAuthCookies(accessToken, refreshToken);

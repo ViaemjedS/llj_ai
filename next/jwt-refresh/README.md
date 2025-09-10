@@ -88,6 +88,10 @@ Prisma Schema 是定义数据库模型、关系和数据类型的配置文件，
     HttpOnly 可防止 JavaScript 访问 Cookie，有效抵御XSS攻击导致的令牌泄漏
     SameSite 可防止跨站请求伪造（CSRF）攻击，限制 Cookie 在跨域请求中的自动发送，提升安全性。
 
+    - 通过jwt verify 方法拿到payload 后，添加了自定义的请求头
+        x-user-id
+        后续页面就可以拿到这个值
+
 - JWT 的构成
     - 头部
         签名算法 HS256
