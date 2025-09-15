@@ -26,5 +26,11 @@ instance.interceptors.response.use(
         return Promise.reject(error)
     }
 )
+// 请求 泛型 类型作为参数传递
+// 约束下api 输出的类型
+export const request = 
+<T>(config: AxiosRequestConfig):Promise<AxiosResponse<T>> => {
+    return instance(config);
+} 
 
 export default instance;
