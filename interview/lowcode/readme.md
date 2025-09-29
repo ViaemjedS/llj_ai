@@ -25,5 +25,26 @@ Aisuda（爱速搭）是阿里巴巴推出的一款低代码应用搭建平台�
     - 组合显示区域（drop） 网页、agent、工作流（n8n,dify）
     - 属性修改区域
 
+## 阿里的Antd 组件库
+    蚂蚁金服
+    pnpm i --save-dev antd
+
+## 物料区组件
+    可扩展的 组件库
+    - Container
+
 ## 我们要开发或维护低代码平台
 - ReactFlow
+
+## 第一次总结
+使用了aisuda阿里低代码编辑器， 发现核心是一个json的数据结构。
+一个通过children 属性串联的组件对象树。
+alloment split pane 布局， 用tailwindcss 写样式， zustand
+来全局状态管理
+数据结构就是树，并不复杂，但是是低代码编辑器的核心
+- 物料区
+- 编辑区
+- 设置区
+
+## Typescript
+Record<string, any> 是 TypeScript 中的一个工具类型，它表示一个对象，其所有属性的键都是字符串类型，而属性的值可以是任意类型（any）。
