@@ -1,11 +1,14 @@
-import {
+import React, {
     useEffect
 } from 'react';
 import {
-    useComponentsStore
+    useComponentsStore,
+    type Component
 } from '../../stores/components';
+import { useComponentConfigStore } from '../../stores/component-config';
 export function EditArea() {
     const { components, addComponent,deleteComponent } = useComponentsStore();
+    const { componentConfig } = useComponentConfigStore();
     useEffect(() => {
         addComponent({
             id: 222,
@@ -15,17 +18,39 @@ export function EditArea() {
         }, 1);
         addComponent({
             id: 333,
-            name: 'video',
+            name: 'Button',
             props: {},
             children: []
         }, 222)
-        setTimeout(() => {
-            deleteComponent(333);
-        }, 3000)
+        // setTimeout(() => {
+        //     deleteComponent(333);
+        // }, 3000)
+
     }, [])
+
+    function renderComponents(components: Component[]):React.ReactNode {
+        return components.map((component: Component) => {
+            const config = componentConfig?.[component.name];
+            if (!config?.component) {
+                return null;
+            }
+            return React.createElement(
+                config.component,
+                {
+                    key: component.id,
+                    ...config.defaultProps,
+                    ...component.props
+                },
+                renderComponents(component.children || [])
+            )
+        })
+    }
     return(
-        <pre>
-            {JSON.stringify(components, null, 2)}
-        </pre>
+        <div>
+            <pre>
+                {JSON.stringify(components, null, 2)}
+            </pre>
+            {renderComponents(components)}
+        </div>
     )
 }

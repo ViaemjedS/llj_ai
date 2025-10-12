@@ -33,6 +33,11 @@ export const useComponentConfigStore = create<State & Action>(
                     text: '按钮',
                 },
                 component: Button
+            },
+            Page: {
+                name: 'Page',
+                defaultProps: {},
+                component: Page
             }
         },
         registerComponent: (name, componentConfig) => set((state) => {
