@@ -1,6 +1,7 @@
 # 手写cursor 最小版本
 
-- 千问点奶茶
+## 近期Agent 爆火产品
+- 千问点奶茶 豆包 元宝
     互联网计算向AI Agent 推理，运行的一个划时代的
     产品。更复杂，更智能，更强大。
 - OpenClaw 养虾
@@ -10,8 +11,9 @@
     任务拆解、计划，找到一批需要的Agent 完成任务。
     Manus ? 卖给了FaceBook(meta)
     开源版本的Manus
+- seedance 抖音视频的数据
 
-- 从llm prompt engineering -> Agentic (智能)
+- 从llm prompt engineering （Deepseek） -> Agentic (智能)
 Engineering （全栈）
 
 - AI Agent 如何打造 ?
@@ -24,3 +26,31 @@ Engineering （全栈）
 AI Agent = llm + Memory + Tool + RAG
 
 ## Agent 是什么?
+其实就是给大模型扩展了Tool和Memory，他本来就可以思考、规划、你给他用tool扩展了能力 ，
+他就可以**自动**做事情，用memory 管理记忆， 他就可以记住你想它记住的东西，还可以使用RAG
+查询内部知识来获取（context）
+
+这样一个知道内部知识、能思考规划、有记忆，能够帮你做事情的扩展后的大模型，就是一个Agent
+
+
+## Tool 工具
+
+###  用react 创建一个todoList
+- 任务， 期待Cursor 编程Agent 完成
+- llm 思考(thinking)，规划(planing) aigc 生成代码
+- tool 让llm扩展 有读写文件的能力，项目就生成了
+- tool bash 执行命令
+
+### Langchain
+AI Agent 框架 提供了memory tool rag
+后端功底（node） nest.js
+
+AI Agent 全栈开发
+
+## LLM with Tools
+
+- llm 选择 
+    qwen-coder
+- tools
+    [read, write, exec]
+- pnpm i @langchain/openai 适配了常见的模型
