@@ -11,14 +11,22 @@ import fs from 'node:fs/promises';
 // 数据校验 zod tool parameter 校验
 import { z } from 'zod'; //简历中的技能项
 
+/* 
+    创建AI模型 
+*/
+
 const model = new ChatOpenAI({
     modelName:process.env.MODEL_NAME,
     apiKey: process.env.OPENAI_API_KEY,
     configuration: {
-        baseURL: process.env.OPENAI_BASE_URL
+        baseURL: process.env.OPENAI_BASE_URL 
     },
     temperature: 0,
 })
+
+
+// 创建读取文件工具
+
 // 原生写法 麻烦
 // 新建一个tool 
 const readFileTool = tool(
@@ -32,21 +40,28 @@ const readFileTool = tool(
         return content;
     },
     {
-        name: 'read_file',
+        name: 'read_file', // 工具名称
         description: `用此工具来读取文件内容。当用户需要读取文件、查看代码、分析文件内容时，调用此工具。
-        输入文件路径(可以是相对路径或绝对路径)`,
-        schema: z.object({path: z.string().describe('要读取的文件路径')})
+        输入文件路径(可以是相对路径或绝对路径)`, // 工具描述，告诉LLM何时使用
+        schema: z.object({path: z.string().describe('要读取的文件路径')}) // 参数校验
     }
 );
 
 
+// 工具绑定
+
 const tools = [
-    readFileTool
+    readFileTool // 将创建的工具放入数组
 ];
 // langchain 提供了一个方法，绑定工具
 // model 不再孤单， 有了工具的陪伴
 // llm 就可以干活了
+//将工具数组绑定到模型上
+//绑定后，模型就知道有哪些工具可以使用，并能自主决定何时调用哪个工具
 const modelWithTools = model.bindTools(tools);
+
+
+//构建对话消息
 const messages = [
     new SystemMessage(`
         你是一个代码助手，可以使用工具读取文件并解释代码。
@@ -68,17 +83,25 @@ const messages = [
 // message llm
 // 最后的结果
 
+
+// 执行模型并处理工具调用
+
+
 let response = await modelWithTools.invoke(messages);
 messages.push(response); // 把llm 要调用工具的message也加入messages数组,形成多轮对话
 
+// 循环处理工具调用
 while(response.tool_calls && response.tool_calls.length > 0) {
     console.log(`\n[检测到 ${response.tool_calls.length} 个工具调用]`);
+
     const toolResults = await Promise.all(
         response.tool_calls.map(async (toolCall) => {
+            // 找到对应的工具
             const tool = tools.find(t => t.name === toolCall.name);
             if (!tool) {
                 return  `错误：找不到工具  ${toolCall.name}`;
             }
+
             console.log(`[执行工具] ${toolCall.name}(${JSON.stringify(toolCall.args)})`);
             try {
                 const result = await tool.invoke(toolCall.args); // 调用
@@ -88,6 +111,8 @@ while(response.tool_calls && response.tool_calls.length > 0) {
             }
         }) 
     );
+
+    // 将工具结果添加到消息历史
     // console.log(toolResults);
     response.tool_calls.forEach((toolCall, index) => {
         messages.push(
@@ -100,8 +125,8 @@ while(response.tool_calls && response.tool_calls.length > 0) {
 
     console.log(messages);
 
-    
-    response = await modelWithTools.invoke(messages);
+    // 再次调用模型
+    response = await modelWithTools.invoke(messages); // 基于工具结果再次调用模型
     // 不再有tool_call
     console.log(response);
 }
