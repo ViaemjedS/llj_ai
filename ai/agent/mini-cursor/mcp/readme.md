@@ -50,3 +50,35 @@ Model Control Protocol 由Anthorpic提出
     提供
     - registerTool
     - connect transport
+
+## mcp 三者关系
+
+- mcp hosts 
+    cursor/vite  Agent的host（主人）
+- mcp clients
+    mcp 规范的一堆tools
+- mcp server 
+    mcp tool 运行的服务器容器
+
+- 工作流程
+    - MCP hosts 配置文件  SDD
+    - initialize 发送一起请求
+        得到mcp server 提供的tools 列表和详情
+    - host prompt 任务
+    - 检索mcp配置文件
+    - client tool 通信方式
+    - mcp server 执行并返回结果
+    - llm ToolMessage 
+
+## MCP 开发流程
+- new MCPServer 创建了mcp server 实例
+- server.register Tool/Resource/Prompt 名字，描述，函数
+- 通信方式 StdioServerTransport  HttpServerTransport
+- host mcp 配置
+
+
+## mcp 直接入住Agent 程序
+
+- 怎么把mcp tools 集成到程序里面？
+    mcp是可插拔的， 可以在程序里面直接调用mcp tool
+
