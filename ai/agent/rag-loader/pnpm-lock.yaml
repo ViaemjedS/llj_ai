@@ -20,6 +20,9 @@ importers:
       '@langchain/openai':
         specifier: ^1.4.2
         version: 1.4.2(@langchain/core@1.1.39(openai@6.33.0(ws@8.20.0)(zod@4.3.6))(ws@8.20.0))(ws@8.20.0)
+      '@langchain/textsplitters':
+        specifier: ^1.0.1
+        version: 1.0.1(@langchain/core@1.1.39(openai@6.33.0(ws@8.20.0)(zod@4.3.6))(ws@8.20.0))
       cheerio:
         specifier: ^1.2.0
         version: 1.2.0
