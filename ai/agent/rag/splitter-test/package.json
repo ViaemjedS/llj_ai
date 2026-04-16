@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@langchain/core": "^1.1.40",
+    "@langchain/textsplitters": "^1.0.1",
+    "dotenv": "^17.4.2",
     "js-tiktoken": "^1.0.21"
   }
 }

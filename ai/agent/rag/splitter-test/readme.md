@@ -27,4 +27,11 @@
             MarkdownTextSplitter 为什么属于RecursiveTextSplitter
             # ## ### 递归
 
+- CharacterTextSplitter
+    直接按Character sperator 切割
+- RecursiveCharacterTextSplitter
+    更人性化，更努力
+    尝试其他符号时，语义就弱下来overlap 来弥补一下
+
+
 
