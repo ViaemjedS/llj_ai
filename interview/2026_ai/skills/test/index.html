@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthropic AI - 下一代人工智能</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Anthropic Brand Colors */
+        :root {
+            --color-dark: #141413;
+            --color-light: #faf9f5;
+            --color-mid-gray: #b0aea5;
+            --color-light-gray: #e8e6dc;
+            --color-orange: #d97757;
+            --color-blue: #6a9bcc;
+            --color-green: #788c5d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            line-height: 1.6;
+        }
+
+        /* Typography - Poppins for headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--color-light);
+            border-bottom: 1px solid var(--color-light-gray);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-dark);
+        }
+
+        .logo span {
+            color: var(--color-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-dark);
+            font-family: 'Poppins', Arial, sans-serif;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            padding: 10rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--color-orange) 0%, transparent 70%);
+            opacity: 0.15;
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--color-blue) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--color-orange);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-mid-gray);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Poppins', Arial, sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--color-orange);
+            color: var(--color-light);
+        }
+
+        .btn-primary:hover {
+            background-color: #c46a4e;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-light);
+            border: 2px solid var(--color-light-gray);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-light);
+            color: var(--color-dark);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--color-mid-gray);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--color-light);
+            border: 1px solid var(--color-light-gray);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(20, 20, 19, 0.1);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card:nth-child(1) .feature-icon {
+            background-color: rgba(217, 119, 87, 0.1);
+            color: var(--color-orange);
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background-color: rgba(106, 155, 204, 0.1);
+            color: var(--color-blue);
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background-color: rgba(120, 140, 93, 0.1);
+            color: var(--color-green);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-dark);
+        }
+
+        .feature-card p {
+            color: var(--color-mid-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            padding: 4rem 2rem;
+        }
+
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: var(--color-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--color-mid-gray);
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            background-color: var(--color-light-gray);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--color-mid-gray);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-dark {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+        }
+
+        .btn-dark:hover {
+            background-color: #2a2a28;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: var(--color-mid-gray);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-header h2,
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Anthropic<span>.</span></div>
+            <ul class="nav-links">
+                <li><a href="#features">功能</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>构建更安全的 <span>AI</span> 未来</h1>
+            <p>Anthropic 致力于开发可靠、可解释和可操控的 AI 系统，让人工智能惠及全人类。</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">开始使用</a>
+                <a href="#" class="btn btn-secondary">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>核心能力</h2>
+            <p>我们的 AI 系统具备行业领先的安全性、可靠性和实用性</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>AI 安全</h3>
+                <p>采用 Constitutional AI 技术，确保 AI 行为符合人类价值观，最大程度降低风险。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>智能推理</h3>
+                <p>强大的推理能力和上下文理解，能够处理复杂的分析、写作和编程任务。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>高效部署</h3>
+                <p>灵活的 API 和 SDK 支持，轻松集成到您的应用程序和工作流程中。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>100K+</h3>
+                <p>开发者使用</p>
+            </div>
+            <div class="stat-item">
+                <h3>99.9%</h3>
+                <p>服务可用性</p>
+            </div>
+            <div class="stat-item">
+                <h3>50+</h3>
+                <p>语言支持</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>技术支持</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>准备好开始了吗？</h2>
+        <p>加入数千家创新企业，使用 Anthropic AI 构建下一代应用。</p>
+        <a href="#" class="btn btn-dark">免费试用</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Anthropic. All rights reserved. 使用 Anthropic 品牌指南设计。</p>
+    </footer>
+</body>
+</html>
