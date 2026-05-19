@@ -17,7 +17,7 @@ import { ChatOpenAI } from '@langchain/openai';
       // 工厂模式, 车，摩托车， 坦克...
       useFactory: (configService: ConfigService) => {
         return new ChatOpenAI({
-          modelNme: configService.get('MODEL_NAME'),
+          modelName: configService.get('MODEL_NAME'),
           apiKey: configService.get('OPENAI_API_KEY'),
           configuration: {
             baseURL: configService.get('OPENAI_BASE_URL'),
