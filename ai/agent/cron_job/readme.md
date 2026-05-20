@@ -33,3 +33,24 @@ async await 的前身，也比较复杂
 
 事件1 -》 事件2 -》 事件3 -》 事件4
 像一条河流
+
+
+## 流式输出
+- nest.js + rxjs 实现服务器端sse（Server-Sent Events）接口
+  - nest.js 以@Sse 装饰器模式 /ai/chat/stream
+  - 本质是 设置了 Content-Type:text/event-stream
+  Cache-Control Connection   Transfer-Encoding 等
+  - service 模块根据langchain stream:true llm 流式响应
+  - 使用rxjs from api 将llm 流式响应转成一个Observable对象
+    pipe 一下  map 转成前端需要的data:chunk 格式
+  - service 使用langchain tool 定义了queryUserTool 等tool
+  - llm 流式大模型响应 for await chunk of stream
+  - chunk 不断的concat 合并
+  - 判断fullAIMessageChunk.tool_call_chunks
+    - 如果是，不干
+    - 如果不是， yield 输出
+  - agentLoop
+    - 如果要用到工具， 执行tool(args)
+  - 结束
+
+  
