@@ -9,6 +9,47 @@ import {
     ToolMessage,
     AIMessageChunk,
 } from '@langchain/core/messages';
+import { z } from 'zod';
+import { tool } from '@langchain/core/tools';
+
+
+
+const queryUserArgsSchema = z.object({
+    userId: z.string().describe('用户ID， 例如:001, 002, 003')
+})
+
+type QueryUserArgs = {
+    userId: string;
+}
+
+const database = {
+    users: {
+        '001': { id: '001', name: '张三', email: 'zhangsan@example.com', role: 'admin' },
+        '002': { id: '002', name: '李四', email: 'lisi@example.com', role: 'user' },
+        '003': { id: '003', name: '王五', email: 'wangwu@example.com', role: 'user' },
+    },
+}
+
+const queryUserTool = tool(
+    async ({ userId }:QueryUserArgs) => {
+        const user = database.users[userId];
+        if(!user) {
+            return `用户 ${userId} 不存在。可用的 ID:001, 002, 003`;
+        }
+        return `用户 ${userId} 的信息是：\n 
+            -姓名${user.name}\n
+            -邮箱${user.email}\n
+            -角色${user.role}\n
+        `;
+    },
+    {
+        name: 'query_user',
+        description: 
+            '查询数据库中的用户信息。输入用户ID，返回该用户的详细信息（姓名、邮箱、角色）'
+        ,
+        schema: queryUserArgsSchema,
+    }
+)
 
 @Injectable()
 export class AiService {
@@ -19,13 +60,9 @@ export class AiService {
     private modelWithTools: Runnable<BaseMessage[], AIMessage>;
     // 将llm 和业务逻辑分离  llm 变化太快
     // 注入了 provide 的model
-    constructor(
-        @Inject('CHAT_MODEL') model: ChatOpenAI,
-        @Inject('QUERY_USER_TOOL') private readonly queryUserTool: any,
-    ) {
-        
+    constructor(@Inject('CHAT_MODEL') model: ChatOpenAI) {
         this.modelWithTools = model.bindTools([
-            this.queryUserTool,
+            queryUserTool,
         ]);
     }
 
@@ -74,7 +111,8 @@ export class AiService {
                 const toolCallId = toolCall.id || '';
                 const toolName = toolCall.name;
                 if (toolName === 'query_user') {
-                    const result = await this.queryUserTool.invoke(toolCall.args);
+                    const args = queryUserArgsSchema.parse(toolCall.args);
+                    const result = await queryUserTool.invoke(args);
                     messages.push(
                         new ToolMessage({
                             content: result,

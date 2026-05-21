@@ -53,4 +53,29 @@ async await 的前身，也比较复杂
     - 如果要用到工具， 执行tool(args)
   - 结束
 
+## Event Source
+- html5 特性的时候
+  - 语义化标签
+  - video/audio 标签，哔哩哔哩
+  - canvas 游戏和3D
+  - 定位 Geolocation 经纬度 美团的点外卖
+  - 表单的增强能力 placeholder required type="range" input 的类型
+  - llm 流式输出 EventSource（自动接收服务器推送的文本数据流）
+  - localStorage/sessionStorage 本地存储
+  - Web Worker  JS 多线程
+  - WebSocket 双向通信
+  - 拖放API
+  - getUserMedia 摄像头 web 直播/视频
+  - history API 前端路由
+
+- ts 的Partial 和 Omit
+  Partial 可选  Omit 排除
+  partial: Partial<Omit<User,'id'>>  可选的用户对象，不包含id字段
+  应用场景 nestjs Patch 局部更新用户信息时，参数的数据校验
+
+- 深化tool
+  - query_user
+  把tool 作为provide 再module 里声明，和原有的service 解耦
+  依赖注入的方式 model.bindTools()
+
   
