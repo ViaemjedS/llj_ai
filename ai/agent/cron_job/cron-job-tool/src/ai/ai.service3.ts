@@ -9,7 +9,6 @@ import {
     ToolMessage,
     AIMessageChunk,
 } from '@langchain/core/messages';
-import { StructuredTool } from '@langchain/core/tools';
 
 @Injectable()
 export class AiService {
@@ -22,15 +21,11 @@ export class AiService {
     // 注入了 provide 的model
     constructor(
         @Inject('CHAT_MODEL') model: ChatOpenAI,
-        @Inject('QUERY_USER_TOOL') private readonly queryUserTool: StructuredTool,
-        @Inject('SEND_MAIL_TOOL') private readonly sendMailTool: StructuredTool,
-        @Inject('WEB_SEARCH_TOOL') private readonly webSearchTool: StructuredTool,
+        @Inject('QUERY_USER_TOOL') private readonly queryUserTool: any,
     ) {
         
         this.modelWithTools = model.bindTools([
             this.queryUserTool,
-            this.sendMailTool,
-            this.webSearchTool,
         ]);
     }
 
@@ -87,26 +82,9 @@ export class AiService {
                             tool_call_id: toolCallId,
                         })
                     )
-                } else if (toolName === 'send_mail') {
-                    const result = await this.sendMailTool.invoke(toolCall.args);
-                    messages.push(
-                        new ToolMessage({
-                            content: result,
-                            name: toolName,
-                            tool_call_id: toolCallId,
-                        })
-                    )
-                } else if (toolName === 'web_search') {
-                    const result = await this.webSearchTool.invoke(toolCall.args);
-                    messages.push(
-                        new ToolMessage({
-                            content: result,
-                            name: toolName,
-                            tool_call_id: toolCallId,
-                        })
-                    )
                 }
             }
         }
+
     }
 }

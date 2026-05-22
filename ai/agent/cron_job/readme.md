@@ -2,6 +2,7 @@
 
 明早9点， 帮我把最新关于open claw 的新闻，整理成一篇日报， 发到我的邮箱。
 
+- 
 - 日程安排的能力交给小龙虾
 - 网络搜索tool
 - 写文章
@@ -54,6 +55,7 @@ async await 的前身，也比较复杂
   - 结束
 
 ## Event Source
+EventSource 是浏览器内置的 SSE 客户端，在 sse-chat-test.html 中用于连接后端 SSE 接口，实时接收 AI 流式回复。
 - html5 特性的时候
   - 语义化标签
   - video/audio 标签，哔哩哔哩
@@ -78,4 +80,13 @@ async await 的前身，也比较复杂
   把tool 作为provide 再module 里声明，和原有的service 解耦
   依赖注入的方式 model.bindTools()
 
-  
+## 邮件tool 
+- 邮件服务
+    邮件服务器 提供http服务 （Web Server 3000 | nginx 80 ）， 邮件服务， 数据库服务 （3306）
+    端口
+    pnpm i nodemailer @nestjs-modules/mailer(nest 接入nodemailer，生态很好)
+    - 发送内容是邮件， 不是text/html
+    - 传输？ HTTP？QQ邮箱提供的SMTP服务   408
+
+
+
