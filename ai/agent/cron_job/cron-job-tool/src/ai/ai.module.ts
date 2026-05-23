@@ -61,6 +61,7 @@ import { MailerService } from '@nestjs-modules/mailer';
         provide: 'SEND_MAIL_TOOL',
         useFactory: (mailerService: MailerService, configService: ConfigService) => {
             // zod 是大模型 tool 工作的工程化保障之一
+            // 确保 AI 生成的参数格式正确，防止发送失败。
             const sendMailArgsSchema = z.object({
                 to: z.email().describe('收件人邮箱地址，例如: test@example.com'),
                 subject: z.string().describe('邮件主题，例如: 重要通知'),
@@ -68,7 +69,9 @@ import { MailerService } from '@nestjs-modules/mailer';
                 html: z.string().describe('HTML 内容，可选'),
             });
             return tool(
-                async ({to, subject, text, html}: {
+                // {to, subject, text, html} 解构赋值，从对象中提取4个属性
+                // : { ... }  +内联类型注解，
+                async ({to, subject, text, html} : {
                     to: string;
                     subject: string;
                     text?: string;

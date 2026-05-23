@@ -26,14 +26,20 @@ import { MailerModule } from '@nestjs-modules/mailer';
         inject: [ConfigService],
         useFactory: (configService: ConfigService) => ({
             transport: {
+                //SMTP 服务器地址
                 host: configService.get('MAIL_HOST'),
+                //SMTP 服务器端口
                 port: Number(configService.get('MAIL_PORT')),
+                //是否使用 SSL/TLS 加密
                 secure: configService.get<string>('MAIL_SECURE') === 'true',
                 auth: {
+                    //发件人邮箱账号
                     user: configService.get<string>('MAIL_USER'),
+                    //邮箱授权码/密码
                     pass: configService.get<string>('MAIL_PASS')
                 },
                 defaults: {
+                    //默认发件人显示名称
                     from: configService.get<string>('MAIL_FROM')
                 }
             }
