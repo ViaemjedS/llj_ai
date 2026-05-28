@@ -38,3 +38,9 @@ cron 一个表达式
 - cron job
 - interval job
 - timeout job
+
+## tools 模块
+- AI Module imports Tool
+- ai 模块，providers 越来越多，增长的趋势
+    不方便管理
+- agent ?

@@ -14,19 +14,55 @@ import {
   SchedulerRegistry 
 } from '@nestjs/schedule';
 import { JobModule } from './job/job.module';
+import { ToolModule } from './tool/tool.module';
+import {
+  ConfigModule,
+  ConfigService,
+} from '@nestjs/config';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'hello',
-      entities: [User, Job],
-      logging: true,
-      synchronize: true,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..','public'),
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    MailerModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        transport: {
+          type: 'smtp',
+          host: configService.get<string>('MAIL_HOST'),
+          port: configService.get<string>('MAIL_PORT'),
+          secure: configService.get<string>('MAIL_SECURE') === 'true',
+          auth: {
+            user: configService.get<string>('MAIL_USER'),
+            pass: configService.get<string>('MAIL_PASSWORD'),
+          },
+        },
+        default: {
+          from: configService.get<string>('MAIL_FROM'),
+        }
+      }),
+    }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get<string>('MYSQL_HOST'),
+        port: Number(configService.get<string>('MYSQL_PORT')),
+        username: configService.get<string>('MYSQL_USERNAME'),
+        password: configService.get<string>('MYSQL_PASSWORD'),
+        database: configService.get<string>('MYSQL_DATABASE'),
+        synchronize: true,  //自动同步数据库
+        logging: true,
+        entities: [User, Job],
+      }),
     }),
     UsersModule,
     AiModule,
@@ -34,10 +70,12 @@ import { JobModule } from './job/job.module';
 
     ),
     JobModule,
+    ToolModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule implements OnApplicationBootstrap {
   @Inject(SchedulerRegistry)
   schedulerRegistry: SchedulerRegistry;
