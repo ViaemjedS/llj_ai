@@ -21,10 +21,14 @@ export class AiService {
         @Inject('CHAT_MODEL') model: ChatOpenAI,
         @Inject('WEB_SEARCH_TOOL') private readonly webSearchTool: StructuredTool,
         @Inject('DB_USERS_CRUD_TOOL') private readonly dbUsersCrudTool: StructuredTool,
+        @Inject('SEND_MAIL_TOOL') private readonly sendMailTool: StructuredTool,
+        @Inject('TIME_NOW_TOOL') private readonly timeNowTool: StructuredTool,
     ) {
         this.modelWithTools = model.bindTools([
             this.webSearchTool,
             this.dbUsersCrudTool,
+            this.sendMailTool,
+            this.timeNowTool,
         ]);
     }
 
@@ -72,6 +76,33 @@ export class AiService {
                             tool_call_id: toolCallId,
                             name: toolName,
                             content: result,
+                        })
+                    )
+                } else if (toolName === 'send_mail') {
+                    const result = await this.sendMailTool.invoke(toolCall.args);
+                    messages.push(
+                        new ToolMessage({
+                            tool_call_id: toolCallId,
+                            name: toolName,
+                            content: result,
+                        })
+                    )
+                } else if (toolName === 'web_search') {
+                    const result = await this.webSearchTool.invoke(toolCall.args);
+                    messages.push(
+                        new ToolMessage({
+                            content: result,
+                            name: toolName,
+                            tool_call_id: toolCallId,
+                        })
+                    )
+                } else if (toolName === 'time_now') {
+                    const result = await this.timeNowTool.invoke(toolCall.args);
+                    messages.push(
+                        new ToolMessage({
+                            content: result,
+                            name: toolName,
+                            tool_call_id: toolCallId,
                         })
                     )
                 }

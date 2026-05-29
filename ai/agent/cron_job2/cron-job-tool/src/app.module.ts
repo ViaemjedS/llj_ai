@@ -38,11 +38,11 @@ import { join } from 'path';
         transport: {
           type: 'smtp',
           host: configService.get<string>('MAIL_HOST'),
-          port: configService.get<string>('MAIL_PORT'),
+          port: Number(configService.get<string>('MAIL_PORT')),
           secure: configService.get<string>('MAIL_SECURE') === 'true',
           auth: {
             user: configService.get<string>('MAIL_USER'),
-            pass: configService.get<string>('MAIL_PASSWORD'),
+            pass: configService.get<string>('MAIL_PASS'),
           },
         },
         default: {

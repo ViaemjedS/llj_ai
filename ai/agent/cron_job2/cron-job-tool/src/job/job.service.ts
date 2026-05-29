@@ -31,9 +31,24 @@ export class JobService implements OnApplicationBootstrap {
         // | 是联合类型，表示可以传入三种类型中的任意一种
         // 第一个| 可以省略，因为已经指定了类型
         input: 
-        | { type: 'cron'; instruction: string; cron: string; isEnabled?: boolean }
-        | { type: 'every'; instruction: string; everyMs?: number; isEnabled?: boolean }
-        | { type: 'at'; instruction: string; at: string; isEnabled?: boolean }
+        | {
+            type: 'cron';
+            instruction: string;
+            cron: string;
+            isEnabled?: boolean;
+          }
+        | {
+            type: 'every';
+            instruction: string;
+            everyMs: number;
+            isEnabled?: boolean;
+          }
+        | {
+            type: 'at';
+            instruction: string;
+            at: Date;
+            isEnabled?: boolean;
+          },
     ) {
         const entity = this.entityManager.create(Job, {
             instruction: input.instruction,

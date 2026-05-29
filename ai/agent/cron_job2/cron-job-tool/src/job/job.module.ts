@@ -1,7 +1,12 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { JobService } from './job.service';
+import { ToolModule } from '../tool/tool.module';
 
 @Module({
-  providers: [JobService]
+  imports: [
+    forwardRef(() => ToolModule),
+  ],
+  providers: [JobService],
+  exports: [JobService],
 })
 export class JobModule {}
