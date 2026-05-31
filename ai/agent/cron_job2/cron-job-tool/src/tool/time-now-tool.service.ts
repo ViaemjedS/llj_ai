@@ -10,15 +10,17 @@ export class TimeNowToolService {
         this.tool = tool(
             async () => {
                 const now = new Date();
-                return JSON.stringify({
+                return {
                     iso: now.toISOString(),
                     timestamp: now.getTime(),
-                });
+                };
             },
             {
                 name: 'time_now',
-                description: '获取当前服务器时间，返回ISO 字符串(iso) 和毫秒级时间戳（timestap）',
-                schema: z.object({}),
+                description: '获取当前服务器时间，返回ISO格式字符串(iso) 和毫秒级时间戳（timestamp）',
+                schema: z.object({
+                    _dummy: z.string().optional().describe('占位参数， 无需传入'),
+                }),
             }
         )
     }
